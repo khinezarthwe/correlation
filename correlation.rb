@@ -7,10 +7,12 @@ data = File.read("hashoutput.json")
 user_arr.each do |user_data|
   usersimilarity[user_data] = Pearson.closest_entities(JSON.parse(data),user_data,limit:20)
 end
+
+
 #p usersimilarity['user_3'][1][1]
-# CSV.open("similarity.csv" ,"w") do |csvobject|
-#   usersimilarity.values.each do |row_arr|
-#     csvobject << row_arr
-#   end
-# end
-File.open('similarity.json','w') {|file| file.write(usersimilarity.to_json)}
+ CSV.open("similarity.csv" ,"w") do |csvobject|
+   usersimilarity.values.each do |row_arr|
+     csvobject << row_arr
+   end
+ end
+#File.open('similarity.json','w') {|file| file.write(usersimilarity.to_json)}
